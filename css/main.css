@@ -6,21 +6,34 @@
   -o-box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
+  width: 100%;
   margin: 0;
   background-color: rgb(53, 83, 103);
+}
+
+.container {
+  width: 96%;
+  overflow: scroll;
+  margin: 0 auto;
 }
 
 .menu-bar {
   width: 100%;
   height: 40px;
   background-color: rgb(39, 69, 133);
+  overflow: hidden;
 
   padding: 2px;
 }
 
 .menu-bar .logo {
   height: 36px;
+  float: left;
   font-size: 26px;
   color: rgb(242, 244, 245);
   font-family: Lato, Helvetica, arial, sans-serif;
@@ -31,15 +44,20 @@ body {
   text-align: center;
 }
 
+.menu-bar a {
+  text-decoration: none;
+  color: rgb(242, 244, 245);
+}
+
 .menu-bar .items .item {
   display: inline-block;
-  height: 40px;
+  height: 36px;
   /*margin-right: 8px; */
-  padding: 2px 4px;
+  padding: 3px 4px;
 
   /*border: 1px solid rgb(222, 223, 223); */
 
-  font-size: 30px;
+  font-size: 28px;
   color: rgb(242, 244, 245);
   font-family: Helvetica, arial, sans-serif;
 
@@ -48,12 +66,15 @@ body {
   -moz-transition: background-color box-shadow ease-in .2s;
   -ms-transition: background-color box-shadow ease-in .2s;
 
+  background-color: rgb(51, 101, 142);
+  box-shadow: 0px 0px 2px rgb(56, 56, 56);
+  border-radius: 2px;
+
   cursor: pointer;
 }
 
-.menu-bar a {
-  text-decoration: none;
-  color: rgb(242, 244, 245);
+.menu-bar .items .item.current {
+  background-color: rgb(52, 128, 167)
 }
 
 .menu-bar .items .item:hover {
@@ -61,7 +82,8 @@ body {
   box-shadow: 0px 0px 4px rgb(56, 56, 56);
 }
 
-.main, .current-view {
+.main,
+.current-view {
   font-family: Helvetiva, Arial, sans-serif;
   margin: 10px auto;
   padding: 6px;
@@ -70,14 +92,35 @@ body {
   box-shadow: 0 0 4px rgb(56, 56, 56);
 }
 
-.timetable {
-  min-width: 1040px;
+.main {
+  width: auto;
+}
+
+.timetable-large {
+  width: 1040px;
+}
+
+.timetable-mobile {
+  min-width: 0;
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.timetable-mobile {
+  overflow-y: scroll;
+}
+
+.timetable-mobile .timetable {
+  overflow-x: hidden;
 }
 
 .current-view {
-  height: 80px;
+  width: 100%;
+  min-height: 80px;
   font-size: 28px;
   color: rgb(31, 41, 75);
+  background-color: rgb(232, 241, 245);
   padding-top: 28px;
   text-align: center;
 }
@@ -105,6 +148,12 @@ body {
   margin-top: 2px;
 }
 
+.timetable-mobile .day {
+  display: block;
+  height: 100%;
+  margin: 0;
+}
+
 .day > .name {
   font-size: 14px;
   display: block;
@@ -128,6 +177,20 @@ body {
   /*background-color: rgb(185, 201, 205); */
 }
 
+.timetable-mobile .day .section {
+  font-size: 24px;
+  overflow: auto;
+  height: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: stretch;
+}
+
 .section {
   position: relative;
   curser: default;
@@ -137,6 +200,11 @@ body {
   display: block;
   padding-top: 4px;
   pointer-events: none;
+}
+
+.timetable-mobile .day .section > div {
+  margin: 0 auto;
+  float: left;
 }
 
 .section > .popup {
@@ -152,4 +220,21 @@ body {
   font-size: 14px;
   padding-top: 41px;
   text-align: center;
+}
+
+/* Swipejs */
+
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float:left;
+  width:100%;
+  position: relative;
 }
